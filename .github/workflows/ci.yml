@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Build
+        run: swift build
+
+      - name: Test
+        run: swift test
+
+      - name: Verify the icon generator still runs
+        run: |
+          swift Tools/IconRenderer.swift /tmp/iconset-check
+          test -f /tmp/iconset-check/icon_512x512@2x.png
+          rm -rf /tmp/iconset-check

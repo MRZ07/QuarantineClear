@@ -1,0 +1,11 @@
+.build/
+dist/
+
+# Icon build artifacts. Tools/IconRenderer.swift is the source of truth and regenerates
+# both of these on every build, so committing them would only allow drift.
+Resources/AppIcon.iconset/
+Resources/AppIcon.icns
+
+# docs/icon.png is deliberately NOT ignored: the README links to it.
+.DS_Store
+*.xcuserstate
